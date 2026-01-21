@@ -1,0 +1,24 @@
+{
+  "name": "train-horn-tracker-mcp",
+  "version": "1.0.0",
+  "description": "An MCP server to help identify where a train whistle may be coming from",
+  "main": "build/index.js",
+  "type": "module",
+  "bin": {
+    "train-horn-tracker": "build/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "start": "node build/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.2.1",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/node-fetch": "^2.6.11",
+    "typescript": "^5.3.3"
+  }
+}
