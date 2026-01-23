@@ -7,19 +7,28 @@ An MCP server that helps identify train horn locations in the Harrisburg/Enola, 
 - 🎯 **Identify Horn Locations**: Determines which railroad crossings are most likely the source of a train horn you just heard
 - 🌡️ **Weather-Based Analysis**: Uses real-time weather (temperature, humidity, wind) to calculate sound propagation
 - 🚆 **Amtrak Schedule**: Shows current Amtrak trains passing through Harrisburg
-- 📝 **Observation Logging**: Track when you hear horns to identify patterns over time (stored in `observations.json`)
+- 📝 **Observation Logging**: Track when you hear horns to identify patterns over time
 - 🛤️ **Crossing Database**: Maintains locations of major crossings near Camp Hill, PA
 
 ## Installation
 
-1. Clone the repository or download the source files.
+1. Create a new directory for the project:
+```bash
+mkdir train-horn-tracker-mcp
+cd train-horn-tracker-mcp
+```
 
-2. Install dependencies:
+2. Copy the files:
+   - Save the TypeScript code as `src/index.ts`
+   - Save the `package.json` 
+   - Save the `tsconfig.json`
+
+3. Install dependencies:
 ```bash
 npm install
 ```
 
-3. Build the server:
+4. Build the server:
 ```bash
 npm run build
 ```
@@ -65,6 +74,15 @@ Claude will create a timestamped log entry.
 **"Show me all the railroad crossings you know about"**
 Claude will list all crossings with distances and directions from Camp Hill.
 
+**"What are the traffic patterns right now?"** or **"When is train activity busiest?"**
+Claude will explain typical traffic patterns for the current time or specific time periods.
+
+**"Tell me about the Pittsburgh Line"** or **"What is the Lurgan Branch?"**
+Claude will provide detailed information about specific NS rail lines.
+
+**"Where is milepost PT 107.5?"** or **"Locate HP 112.9"**
+Claude will find the location of NS milepost references - useful when monitoring railroad radio traffic on Broadcastify.
+
 ## How It Works
 
 ### Sound Propagation Model
@@ -72,7 +90,7 @@ Claude will list all crossings with distances and directions from Camp Hill.
 The server calculates sound propagation based on:
 
 - **Temperature**: Warmer air extends range
-- **Humidity**: Humid air carries sound better
+- **Humidity**: Humid air carries sound better  
 - **Wind**: Sound travels farther downwind
 - **Precipitation**: Rain/snow attenuates sound
 - **Base Range**: Train horns (110-120 dB) typically audible 2-4 miles
@@ -103,7 +121,7 @@ Trains must sound horns at every public grade crossing:
 ## Data Sources
 
 - **Weather**: Open-Meteo API (free, no API key required)
-- **Amtrak**: Amtraker community API (V3)
+- **Amtrak**: Amtraker community API
 - **Crossings**: Manually curated from maps/local knowledge
 
 ## Customization
@@ -113,11 +131,11 @@ Trains must sound horns at every public grade crossing:
 Edit the `RAILROAD_CROSSINGS` array in `src/index.ts`:
 
 ```typescript
-{
-  name: "Your Crossing Name",
-  lat: 40.1234,
-  lon: -76.5678,
-  line: "Railroad Name"
+{ 
+  name: "Your Crossing Name", 
+  lat: 40.1234, 
+  lon: -76.5678, 
+  line: "Railroad Name" 
 },
 ```
 
@@ -137,16 +155,13 @@ const HOME_LON = -76.9197;  // Your longitude
 - **Crossing database**: Not exhaustive (add more as you identify them)
 - **Sound physics**: Simplified model (doesn't account for terrain, buildings)
 
-## Future Enhancements & Generalization Plans
+## Future Enhancements
 
-This server is currently hardcoded for a specific location in Camp Hill, PA, but we plan to generalize it:
-
-- 🌍 **Dynamic Location**: Future versions will prompt the user for their location rather than requiring hardcoded coordinates or environment variables.
-- 🚉 **Amtrak Station Selection**: Ability to choose different Amtrak stations for schedule tracking.
-- 🗺️ **OpenStreetMap integration**: Auto-discover crossings near the user's location using the Overpass API.
-- 🤖 **Interactive Setup**: A more sophisticated onboarding process that guides the user through configuration.
-- 🧠 **Pattern Recognition**: Machine learning to identify patterns in your observations over time.
-- 🔊 **Audio Analysis**: Potential integration with microphones to automatically detect and analyze horn patterns.
+Potential additions:
+- OpenStreetMap integration to auto-discover crossings
+- Machine learning to identify patterns in your observations
+- Integration with railfan forums for crowd-sourced train activity
+- Audio analysis to differentiate horn types/locomotives
 
 ## Troubleshooting
 
